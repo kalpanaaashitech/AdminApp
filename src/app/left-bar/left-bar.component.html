@@ -1,0 +1,123 @@
+<aside class="main-sidebar">-->
+    <section class="sidebar">
+      <!-- <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form> -->
+      <style>
+        .block{
+          display: block ;
+        }
+        .none{
+          display: none ;
+        }
+        </style>
+
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN MENUS</li>
+
+        <li class="treeview" [class.menu-open]="UsersOpen">
+          <a (click)="toggleUsersDirectory()">
+            <i class="fa fa-users"></i>
+            <span> Users Directory</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" [class.block]="UsersOpen">
+            <li><a  routerLink="/all-users"><i class="fa fa-circle-o"></i> Active Users</a></li>
+            <li><a  routerLink="/duplicate-users"><i class="fa fa-circle-o"></i> Duplicate Users</a></li>
+            <li><a  routerLink="/blocked-users"><i class="fa fa-circle-o"></i> Blocked Users</a></li>
+            <li><a  routerLink="/deleted-users"><i class="fa fa-circle-o"></i> Deleted Users</a></li>
+            <li><a  routerLink="/inactive-users"><i class="fa fa-circle-o"></i> Inactive Users</a></li>
+          </ul>
+        </li>
+
+        <!-- <li><a routerLink=""><i class="fa fa-circle-o text-red"></i> <span>Main Page</span></a></li> -->
+        <!-- <li><a routerLink="/all-users"><i class="fa fa-circle-o text-yellow"></i> <span> Users </span></a></li>  -->
+        <li><a  routerLink="/explore-posts"><i class="fa fa-circle-o text-red"></i> <span> Explore Posts </span></a></li>  
+        <li><a  routerLink="/impress-posts"><i class="fa fa-circle-o text-aqua"></i> <span> Impress Posts </span></a></li>
+        <li><a  routerLink="/travel-posts"><i class="fa fa-circle-o text-yellow"></i> <span> Travel Posts </span></a></li>
+        <li><a  routerLink="/express-posts"><i class="fa fa-circle-o text-red"></i> <span> Express Posts </span></a></li>
+        <li><a  routerLink="/converse-posts"><i class="fa fa-circle-o text-aqua"></i> <span> Converse Posts </span></a></li>
+        <li><a  routerLink="/curious-posts"><i class="fa fa-circle-o text-yellow"></i> <span> Curious Posts </span></a></li>
+        <!-- <li class="treeview" [class.menu-open]="exploreOpen">
+          <a (click)="toggleExploreMenu()">
+            <i class="fa fa-pie-chart"></i>
+            <span> Explore Posts</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" [class.block]="exploreOpen">
+            <li><a  routerLink="/explore-posts"><i class="fa fa-circle-o"></i> All Posts</a></li>
+          </ul>
+        </li> -->
+        <!-- <li class="treeview" [class.menu-open]="impressOpen">
+            <a (click)="toggleImpressMenu()">
+              <i class="fa fa-pie-chart"></i>
+              <span> Impress Posts</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [class.block]="impressOpen">
+              <li><a  routerLink="/impress-posts"><i class="fa fa-circle-o"></i> All Posts</a></li>
+            </ul>
+        </li> -->
+        <!-- <li class="treeview" [class.menu-open]="travelOpen">
+            <a (click)="toggleTravelMenu()">
+              <i class="fa fa-pie-chart"></i>
+              <span> Travel Posts</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [class.block]="travelOpen">
+              <li><a  routerLink="/travel-posts"><i class="fa fa-circle-o"></i> All Posts</a></li>
+            </ul>
+        </li> -->
+        <!-- <li class="treeview" [class.menu-open]="expressOpen">
+            <a (click)="toggleExpressMenu()">
+              <i class="fa fa-pie-chart"></i>
+              <span> Express Posts</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [class.block]="expressOpen">
+              <li><a  routerLink="/express-posts"><i class="fa fa-circle-o"></i> All Posts</a></li>
+            </ul>
+        </li> -->
+        <!-- <li class="treeview" [class.menu-open]="converseOpen">
+            <a (click)="toggleConverseMenu()">
+              <i class="fa fa-pie-chart"></i>
+              <span> Converse Posts</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [class.block]="converseOpen">
+              <li><a  routerLink="/converse-posts"><i class="fa fa-circle-o"></i> All Posts</a></li>
+            </ul>
+        </li> -->
+        <!-- <li class="treeview" [class.menu-open]="curiousOpen">
+            <a (click)="toggleCuriousMenu()">
+              <i class="fa fa-pie-chart"></i>
+              <span> Curious Posts</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [class.block]="curiousOpen">
+              <li><a  routerLink="/curious-posts"><i class="fa fa-circle-o"></i> All Posts</a></li>
+            </ul>
+        </li> -->
+      </ul>
+    </section>
+  </aside>

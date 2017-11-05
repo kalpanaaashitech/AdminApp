@@ -1,0 +1,25 @@
+<p style="text-align: center;
+height: 40px;
+line-height: 40px;
+font-size: 18px;
+font-weight: 600;
+background-color: #3c8dbc;
+color: white;">    {{ title }}    </p>
+
+
+
+<p style="margin: 15px 25px;
+font-size: 17px;
+max-width: 400px;
+line-height: 30px;
+text-align: center;
+font-weight: 600;
+color: rgba(70, 69, 69, 0.58);">  {{ message }}</p>
+
+<hr style="border-top: 1px solid #d0e9f9; margin:0px">
+
+<button style="margin: 8px; background-color: #ec9d20; color: white; font-weight: 600; opacity: 0.8;" type="button" mat-button 
+(click)="dialogRef.close()">Cancel</button>
+
+<button style="float: right; margin: 8px; background-color: #3c8dbc; color: white; font-weight: 600;" type="button" mat-raised-button 
+    (click)="dialogRef.close(true)">OK</button>

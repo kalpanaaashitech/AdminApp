@@ -1,0 +1,170 @@
+
+<div class="content-wrapper" style="min-height: 1100px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+       Converse Posts
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"> Converse Posts </li>
+      </ol>
+    </section>
+  
+
+
+    <style>
+        .block{
+            display: block !important ;
+        }
+        .none{
+            display: none ;
+        }
+    </style>
+       
+  
+  
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row" style="text-align:center" *ngIf="posts?.length < '1' && Loader " >
+            <img src="../../assets/12.gif" style="height:120px; width:160px;" ><br>
+            <h4 style="color:rgba(230, 57, 5, 0.66);">Loading ...</h4>
+        </div>
+
+
+      <div class="row" *ngIf="posts?.length >= '1' || !Loader ">
+        <div class="col-sm-12" style="text-align:center" *ngIf="posts?.length < '1'" >
+                <h3 style="color:rgba(230, 57, 5, 0.66);font-weight:700"> Converse Posts Empty </h3>
+        </div>
+
+        <div class="col-sm-12" *ngIf="posts?.length >='1'">
+          <div class="box box-primary">
+            <div class="box-body ">
+                
+  
+                <ul class="timeline timeline-inverse">
+                  <li class="time-label">
+                        <span class="bg-red">
+                        {{date | date:'medium'}}
+                        </span>
+                  </li>
+                  <li  *ngFor="let post of posts ;let i = index " >
+                      <i class="fa fa-angle-double-right bg-blue"></i>
+                      <div class="timeline-item">
+                        <div class="row">
+                          <div class="col-sm-9 timeline-item-left">
+                              <h3 class="timeline-header" *ngIf="post.post_type == '9'" >
+                                <span >
+                                    <img *ngIf="post.user_image == ''"  src="http://www.inscube.com/assets/images/user.png"  class="profile-img img-circle" style="width:40px;height:40px">
+                                    <img *ngIf="(post.user_image | lowercase).indexOf('http') != '-1'"  src="{{post.user_image}}"  class="profile-img img-circle" style="width:40px;height:40px">
+                                    <img *ngIf="post.user_image != '' && (post.user_image | lowercase).indexOf('http') == '-1'" src="http://www.inscube.com/assets/profile/{{post.user_image}}" class="profile-img img-circle" style="width:40px;height:40px">
+                                </span>
+                                  <span class="blue post-type" (click)="UserPage(post.user_id)" style="cursor:pointer"> {{ post.user_name }} </span> <br> 
+                                  <span class="time"><i class="fa fa-clock-o"></i> {{ post.updated_at  | date:'medium' }}</span>
+                              </h3>
+                              <div class="timeline-body">
+                                <span class="post-title-main" *ngIf="post.post_type == '9'"><span class="red post-title"> Title :</span> {{ post.contents}} <br> </span>  
+                                <div class="post-image">
+                                  <div *ngFor="let image of post.images ;let j = index" [ngClass]="{'image-1':post.images?.length=='1','image-2':post.images?.length=='2','image-3':post.images?.length=='3','image-4':post.images?.length=='4','image-5':post.images?.length=='5','image-6':post.images?.length=='6'}" >
+                                    <img *ngIf="(image.image | lowercase).indexOf('.jpg') != -1 || (image.image | lowercase).indexOf('.jpeg') != -1 || (image.image | lowercase).indexOf('.png') != -1 || (image.image | lowercase).indexOf('.gif') != -1 || (image.image | lowercase).indexOf('.tiff') != -1" src="http://www.inscube.com/assets/what_if/{{image.image}}" style="height:100%">
+                                    <video *ngIf=" (image.image | lowercase).indexOf('.3gp') != -1 || (image.image | lowercase).indexOf('.mp4') != -1 || (image.image | lowercase).indexOf('.avi') != -1 || (image.image | lowercase).indexOf('.flv') != -1" width="100%" style="max-height:300px;" controls> <source src="http://www.inscube.com/assets/what_if/{{image.image}}">  </video>
+                                  </div>
+                                </div>                   
+                              </div>
+                          </div>
+                          <div class="col-sm-3 post_tabs converse" style="padding-left:0px;">
+  
+                              <tabset>
+                                  <tab>
+                                    <span *tabHeading>
+                                        Questions ( {{ post.questions?.length }} )
+                                    </span>
+                                    <ul class="tab_in_ul" >
+                                     <a *ngFor = "let question of post.questions | slice:0:5 ">
+                                      <li class="tab_in_li">
+                                          <div class="row">
+                                              <div class="col-sm-3">
+                                                  <img *ngIf="question.user_image == ''"  src="http://www.inscube.com/assets/images/user.png"  class="profile-img img-circle" style="width:35px;height:35px; margin:5px;">
+                                                  <img *ngIf="(question.user_image | lowercase).indexOf('http') != '-1'"  src="{{question.user_image}}"  class="profile-img img-circle" style="width:35px;height:35px">
+                                                  <img *ngIf="question.user_image != '' && (question.user_image | lowercase).indexOf('http') == '-1' " src="http://www.inscube.com/assets/profile/{{question.user_image}}" class="profile-img img-circle" style="width:35px;height:35px;margin:5px;">
+                                              </div>
+                                              <div class="col-sm-9" style="padding-left:0px;">
+                                                  <p class="tab_in_ques" *ngIf="question.question?.length > 22 "> {{ question.question | slice:0:22 }}... </p>
+                                                  <p class="tab_in_ques" *ngIf="question.question?.length < 22 ">{{ question.question | slice:0:22 }} </p>
+                                              </div>
+                                          </div>
+                                      </li>
+                                     </a>
+                                    </ul>
+                                  </tab>
+                              </tabset>
+                          </div>
+                          <div class="col-sm-12">
+                              <div class="row timeline-footer" style="margin:0px">
+                                <div class="col-sm-12 post_tabs" [ngClass]="{'converse_tabs_2':post.images?.length=='2','converse_tabs_3':post.images?.length=='3','converse_tabs_4':post.images?.length=='4','converse_tabs_5':post.images?.length=='5'}" style="border-left:none">
+                                   <tabset>
+                                      <tab *ngFor="let image of post.images ;let l = index">
+                                        <span *tabHeading>
+                                            {{ image.options }}
+                                        </span>
+                                        <ul class="tab_in_ul" >
+                                        <li class="tab_in_li"> <b>  No Of Supports :  <span class="count"> {{ image.supports?.length }} </span> </b> </li>
+                                        <li class="tab_in_li"> <b> No Of Opinions: <span class="count"> {{ image.opinions?.length }} </span> </b>  </li>
+                                         <a *ngFor = "let opinion of image.opinions | slice:0:5 ">
+                                          <li class="tab_in_li">
+                                              <div class="row">
+                                                  <div class="col-sm-1" style="padding-right:0px;width:7%">
+                                                      <img *ngIf="opinion.user_image == ''"  src="http://www.inscube.com/assets/images/user.png"  class="profile-img img-circle" style="width:35px;height:35px; margin:5px;">
+                                                      <img *ngIf="(opinion.user_image | lowercase).indexOf('http') != '-1'"  src="{{opinion.user_image}}"  class="profile-img img-circle" style="width:35px;height:35px">
+                                                      <img *ngIf="opinion.user_image != '' && (opinion.user_image | lowercase).indexOf('http') == '-1' " src="http://www.inscube.com/assets/profile/{{opinion.user_image}}" class="profile-img img-circle" style="width:35px;height:35px;margin:5px;">
+                                                  </div>
+                                                  <div class="col-sm-11" style="padding-left:0px;">
+                                                      <p class="tab_in_ques "> {{ opinion.opinions }} </p>
+                                                  </div>
+                                              </div>
+                                          </li>
+                                         </a>
+                                        </ul>
+                                      </tab>
+                                  </tabset> 
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div style="float:right">
+                                        <a class="btn btn-danger btn-sm" (click)="BlockPost(post.id)" >Block Post...</a>
+                                    </div>    
+                                </div>
+
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                  </li>
+                  <li>
+                    <i class="fa fa-clock-o bg-gray"></i>
+                  </li>
+                </ul>
+
+                <go-top-button [html]="'<i class=\'fa fa-arrow-up\'></i>'" [animate]="true" [speed]="5" [acceleration]="2" [scrollDistance]="500"
+                    [styles]="{ 'border-radius':'20px', 'right':'25px', 'top':'90%', 'width':'40px', 'height':'40px', 'background':'transparent', 
+                    'color':'rgba(230, 57, 5, 0.66)', 'border':'2px solid', 'line-height':'30px', 'font-size':'20px' }">
+                  </go-top-button>
+  
+                  <div class="col-sm-12" style="text-align: center; display:none" [class.block]="Continu">
+                      <img src="../../assets/12.gif" style="height:60px; width:80px;" ><br>
+                      <b style="color:rgba(230, 57, 5, 0.66);">Loading Posts ...</b>
+                  </div>
+                  <div class="col-sm-12" style="text-align: center; display:none" [class.block]="End">
+                      <b style="color:rgba(230, 57, 5, 0.66);">No More Posts.</b>
+                  </div>
+
+                  
+            </div>
+          </div>
+        </div> 
+      </div>
+    </section>
+  </div>
+  

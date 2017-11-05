@@ -1,0 +1,87 @@
+.post-image{
+    width: 100%;
+    display: inline-block;
+}
+.post-image .image-1{
+    width: 100%;
+    height: 300px;
+    float: left;
+}
+.post-image .image-2{
+    width: 50%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-3{
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-4{
+    width: 50%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-5{
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-5:nth-child(4){
+    width: 50%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-5:nth-child(5){
+    width: 50%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-6{
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-7{
+    width: 25%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-7:nth-child(5){
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-7:nth-child(6){
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-7:nth-child(7){
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-8{
+    width: 25%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-9{
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}

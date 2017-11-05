@@ -1,0 +1,469 @@
+<div class="active tab-pane" style="margin-top:20px;">
+
+    <div class="row" style="text-align:center" *ngIf="posts?.length < '1' && Loader " >
+        <img src="../../assets/12.gif" style="height:120px; width:160px;" ><br>
+        <h4 style="color:rgba(230, 57, 5, 0.66);">Loading ...</h4>
+    </div>
+
+  <div class="row" *ngIf="posts?.length < '1' && !Loader "> <h3 style="text-align:center;color:rgba(230, 57, 5, 0.66)"> No Posts ...</h3></div>
+
+  <!-- The timeline -->
+  <ul class="timeline timeline-inverse" *ngIf="posts?.length >= '1'">
+
+    <!-- timeline time label -->
+    <li class="time-label">
+          <span class="bg-red">
+           {{date | date:'medium'}}
+          </span>
+    </li>
+    <!-- /.timeline-label -->
+
+
+
+
+    <li  *ngFor="let post of posts ;let i = index ">
+
+
+
+        <i class="fa fa-angle-double-right bg-blue"></i>
+        <div class="timeline-item">
+            <span class="time"><i class="fa fa-clock-o"></i> {{ post.updated_at  | date:'medium' }}</span>
+
+
+            <h3 class="timeline-header" *ngIf="post.post_type == '1'" >
+              <span class="blue post-type"> Curious </span> Post <br> 
+            </h3>
+            <h3 class="timeline-header" *ngIf="post.post_type == '6'" >
+                <span class="blue post-type"> Express </span> Post <br> 
+            </h3>
+            <h3 class="timeline-header" *ngIf="post.post_type == '7'" >
+                <span class="blue post-type"> Impress </span> Post <br> 
+            </h3>
+            <h3 class="timeline-header" *ngIf="post.post_type == '4'" >
+              <span class="blue post-type"> Travel </span> Post <br> 
+            </h3>
+            <h3 class="timeline-header" *ngIf="post.post_type == '3'" >
+                <span class="blue post-type"> Job Offer </span> Post <br> 
+            </h3>
+            <h3 class="timeline-header" *ngIf="post.post_type == '2'" >
+                <span class="blue post-type"> Explore </span> Post in <span class="blue"> {{ post.story_type }} </span> <br> 
+            </h3>
+            <h3 class="timeline-header" *ngIf="post.post_type == '9'" >
+                <span class="blue post-type"> Converse </span> Post <br> 
+            </h3>
+
+
+
+            <div class="timeline-body">
+    
+              <span class="post-title-main" *ngIf="post.post_type == '1'"><span class="red post-title"> WHAT IF :</span> {{ post.question}} <br> </span>
+
+              <span class="post-title-main" *ngIf="post.post_type == '7' || post.post_type == '4' || post.post_type == '3' || post.post_type == '2' "><span class="red post-title"> Title :</span> {{ post.question}} <br> </span>  
+              
+              <span class="post-title-main" *ngIf="post.post_type == '9'"><span class="red post-title"> Title :</span> {{ post.contents}} <br> </span> 
+
+              <span *ngIf="post.post_type == '6' ">
+                  <span class="red post-title"> Content :</span>  {{ post.question}} 
+              </span>
+              
+
+            
+
+
+            <div class="post-image">
+              <div *ngFor="let image of post.images ;let j = index" [ngClass]="{'image-1':post.images?.length=='1','image-2':post.images?.length=='2','image-3':post.images?.length=='3','image-4':post.images?.length=='4','image-5':post.images?.length=='5','image-6':post.images?.length=='6','image-7':post.images?.length=='7','image-8':post.images?.length=='8','image-9':post.images?.length=='9'}" >
+                <img *ngIf="(image.image | lowercase).indexOf('.jpg') != -1 || (image.image | lowercase).indexOf('.jpeg') != -1 || (image.image | lowercase).indexOf('.png') != -1 || (image.image | lowercase).indexOf('.gif') != -1 || (image.image | lowercase).indexOf('.tiff') != -1" src="http://www.inscube.com/assets/what_if/{{image.image}}" style="width:100%;height:100%">
+                <video *ngIf=" (image.image | lowercase).indexOf('.3gp') != -1 || (image.image | lowercase).indexOf('.mp4') != -1 || (image.image | lowercase).indexOf('.avi') != -1 || (image.image | lowercase).indexOf('.flv') != -1" width="100%" style="max-height:300px;" controls> <source src="http://www.inscube.com/assets/what_if/{{image.image}}">  </video>
+              </div>
+            </div>
+
+              <div  *ngIf="post.link != '' && post.post_type != '3'">
+                <iframe *ngIf="(post.link | lowercase).indexOf('youtube.com') != -1" width="100%" height="315" frameborder="0" style="border:0" [src]=" post.link | YoutubeReplace"> </iframe> 
+                <div  *ngIf="(post.link | lowercase).indexOf('youtube.com') == -1">
+                  <b> &emsp; Added.Link : </b> <a href="{{post.link}}" target="blanck" > {{post.link}} </a>
+               </div>
+              </div>
+
+              <div  *ngIf="post.latitude != ''">
+                  <iframe width="100%" height="250" frameborder="0" style="border:0"
+                  [src]="post.contents | GmapAdd" allowfullscreen>
+                </iframe>
+              </div>
+
+
+
+
+
+
+              <span *ngIf="post.post_type != '6' && post.post_type != '9' && post.post_type != '4'  && post.story_type != 'Pets' ">
+                <span class="red post-title"> Content :</span><br> &emsp; &emsp;  {{ post.contents}}  <br>
+              </span> 
+
+              <div  *ngIf="post.post_type == '3' && post.link != ''">
+                  <b> &emsp; &emsp; Ref.Link : </b> <a href="{{post.link}}" target="blanck" > {{post.link}} </a>
+              </div>
+
+              <span *ngIf="post.post_type == '4'">
+                <span class="red post-title"> Place :</span> {{ post.contents}} 
+              </span> 
+
+              <span *ngIf="post.post_type == '3'">
+                    <span class="red post-title"> Application Details :</span> <br> &emsp; &emsp; {{ post.application_det}} 
+              </span> 
+               
+              
+
+
+              <div class="converse-main" *ngIf="post.post_type == '9'">
+                  <div *ngFor="let option of post.images ;let k = index"  [ngClass]="{'converse-sub-2':post.images?.length=='2','converse-sub-3':post.images?.length=='3','converse-sub-4':post.images?.length=='4','converse-sub-5':post.images?.length=='5'}"> 
+                    <span class="converse-top-text"><b>{{option.options}}</b></span> 
+                    <p class="converse-count-text" >No Of Supports : 
+                      <span class="converse-count"><b> {{ option.supports?.length }} </b>  </span> 
+                    </p>
+                    <p class="converse-count-text">No Of Opinions : 
+                      <span class="converse-count"><b> {{ option.opinions?.length }} </b></span> 
+                    </p>
+                  </div>
+                </div>
+
+
+
+
+
+            </div>
+            <div class="timeline-footer ">
+                <div class="row">
+                    <div class="col-sm-9">
+                      <span class="count-text" *ngIf="post.post_type != '1' && post.post_type != '9'" >No of Emots : <span class="count" >{{ post.comments?.length }}</span>,&emsp;</span>
+                      <span class="count-text"  *ngIf="post.post_type != '1' && post.post_type != '7' && post.post_type != '4' && post.post_type != '6'">No of Questions : <span class="count">{{ post.questions?.length }}</span>,&emsp;</span>
+                      <span class="count-text"  *ngIf="post.post_type == '7' || post.post_type == '4' || post.post_type == '2'">No of Opinions : <span class="count">{{ post.opinions?.length }}</span>,&emsp;</span>
+                      <span class="count-text"  *ngIf="post.post_type == '7' ">No of Try It : <span class="count">{{ post.tryit?.length }}</span>,&emsp;</span>
+                      <span class="count-text"  *ngIf="post.post_type == '4' ">No of Must Do : <span class="count">{{ post.mustdo?.length }}</span>,&emsp;</span>
+                      <span class="count-text"  *ngIf="post.post_type == '1' ">No of Answers : <span class="count">{{ post.answers?.length }}</span>,&emsp;</span>
+                      <span class="count-text"  *ngIf="post.post_type == '1' ">No of follows : <span class="count">{{ post.question_user_follow?.length }}</span>,&emsp;</span>
+                    </div>
+                    <div class="col-sm-3" style="padding:0px">
+                      <a class="btn btn-primary btn-sm" [class.active]="post.post_type != '1'" >View Post...</a>
+                      <a class="btn btn-danger btn-sm" >Block...</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+
+
+    </li>
+
+
+
+
+
+    <!-- timeline item -->
+    <!-- <li>
+      <i class="fa fa-angle-double-right bg-blue"></i>
+
+      <div class="timeline-item">
+        <span class="time"><i class="fa fa-clock-o"></i> 12:05 PM</span>
+        <h3 class="timeline-header">
+          <span class="blue post-type"> Curious </span> Post <br> 
+        </h3>
+        <div class="timeline-body">
+
+          <span class="post-title-main"><span class="red post-title"> WHAT IF :</span> Etsy doostang zoodles disqus voxy zoodles,</span> <br><br>
+
+          <span class="red post-title"> Content :</span>  Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+          weebly ning heekya handango imeem plugg dopplr jibjab, movity
+          jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+          quora plaxo ideeli hulu weebly balihoo...
+        </div>
+        <div class="timeline-footer ">
+            <div class="row">
+                <div class="col-sm-9">
+                </div>
+                <div class="col-sm-3" style="padding:0px">
+                  <a class="btn btn-primary btn-sm ">View Post...</a>
+                  <a class="btn btn-danger btn-sm ">Block...</a>
+                </div>
+              </div>
+        </div>
+      </div>
+    </li> -->
+    <!-- END timeline item -->
+
+
+
+
+    <!-- timeline item -->
+     <!-- <li>
+              <i class="fa fa-angle-double-right bg-blue"></i>
+      
+              <div class="timeline-item">
+                <span class="time"><i class="fa fa-clock-o"></i> 11:05 AM</span>
+                <h3 class="timeline-header">
+                  <span class="blue post-type"> Express </span> Post <br> 
+                </h3>
+                <div class="timeline-body">
+                    <span class="red post-title"> Content :</span>  Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                  weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                  jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                  quora plaxo ideeli hulu weebly balihoo  Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                  weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                  jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                  quora plaxo ideeli hulu weebly balihoo...
+                </div>
+                <div class="timeline-footer ">
+                    <div class="row">
+                        <div class="col-sm-9">
+                        </div>
+                        <div class="col-sm-3" style="padding:0px">
+                          <a class="btn btn-primary btn-sm ">View Post...</a>
+                          <a class="btn btn-danger btn-sm ">Block...</a>
+                        </div>
+                      </div>
+                </div>
+              </div>
+    </li> -->
+      <!-- END timeline item -->
+
+
+
+
+
+
+      
+    <!-- timeline item -->
+     <!-- <li>
+        <i class="fa fa-angle-double-right bg-blue"></i>
+
+        <div class="timeline-item">
+          <span class="time"><i class="fa fa-clock-o"></i> 10:05 AM</span>
+          <h3 class="timeline-header">
+            <span class="blue post-type"> Impress </span> Post <br> 
+          </h3>
+          <div class="timeline-body">
+
+            <span class="post-title-main"><span class="red post-title"> Title :</span> Etsy doostang zoodles disqus voxy zoodles,</span> <br><br>
+            
+            <iframe width="100%" height="320" src="https://www.youtube.com/embed/pDiVmixW3MA"></iframe> <br>
+            <span class="red post-title"> Content :</span> Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+            weebly ning heekya handango imeem plugg dopplr jibjab, movity
+            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+            quora plaxo ideeli hulu weebly balihoo...
+
+            <div class="converse-main">
+              <div class="converse-sub-5"> 
+                <span class="converse-top-text"><b>No of Emots</b></span> 
+                <p class="converse-count-text" >No Of Supports : <span class="converse-count"><b>5</b></span> </p>
+                <p class="converse-count-text">No Of Opinions : <span class="converse-count"><b>5</b></span> </p>
+              </div>
+              <div class="converse-sub-5"> 
+                <span class="converse-top-text"><b>No of Emots</b></span> 
+                <p class="converse-count-text">No Of Supports : <span class="converse-count"><b>5</b></span> </p>
+                <p class="converse-count-text">No Of Opinions : <span class="converse-count"><b>5</b></span> </p> 
+              </div>
+              <div class="converse-sub-5">
+                <span class="converse-top-text"><b>No of Emots</b></span> 
+                <p class="converse-count-text">No Of Supports : <span class="converse-count"><b>5</b></span> </p>
+                <p class="converse-count-text">No Of Opinions : <span class="converse-count"><b>5</b></span> </p> 
+              </div>
+              <div class="converse-sub-5">
+                <span class="converse-top-text"><b>No of Emots</b></span> 
+                <p class="converse-count-text">No Of Supports : <span class="converse-count"><b>5</b></span> </p>
+                <p class="converse-count-text">No Of Opinions : <span class="converse-count"><b>5</b></span> </p>
+              </div>
+              <div class="converse-sub-5">
+                <span class="converse-top-text"><b>No of Emots</b></span> 
+                <p class="converse-count-text">No Of Supports : <span class="converse-count"><b>5</b></span> </p>
+                <p class="converse-count-text">No Of Opinions : <span class="converse-count"><b>5</b></span> </p>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-footer ">
+            <div class="row">
+              <div class="col-sm-9">
+                <span class="count-text">No of Emots : <span class="count">30</span>,&emsp;</span>
+                <span class="count-text">No of Opinions : <span class="count">4</span>,&emsp;</span>
+                <span class="count-text">No of Try It's : <span class="count">7</span>,&emsp;</span>
+              </div>
+              <div class="col-sm-3" style="padding:0px">
+                <a class="btn btn-primary btn-sm ">View Post...</a>
+                <a class="btn btn-danger btn-sm ">Block...</a>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+    </li>  -->
+      <!-- END timeline item -->
+
+    <!-- timeline time label -->
+    <!-- <li class="time-label">
+          <span class="bg-green">
+            10 Aug. 2017
+          </span>
+    </li> -->
+
+      <!-- timeline item -->
+      <!-- <li>
+          <i class="fa fa-angle-double-right bg-blue"></i>
+  
+          <div class="timeline-item">
+            <span class="time"><i class="fa fa-clock-o"></i> 10:05 AM</span>
+            <h3 class="timeline-header">
+              <span class="blue post-type"> Travel </span> Post <br> 
+            </h3>
+            <div class="timeline-body">
+              
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.92833967561!2d76.98012181435318!3d11.043999592140274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba858896c5d6491%3A0x7f593947f0db87ba!2sAASHI+TECHNOLOGIES!5e0!3m2!1sen!2sin!4v1507028683608" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe> <br>
+
+            <span class="red post-title"> Content :</span> Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+              weebly ning heekya handango imeem plugg dopplr jibjab, movity
+              jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+              quora plaxo ideeli hulu weebly balihoo...
+            </div>
+            <div class="timeline-footer ">
+              <div class="row">
+                <div class="col-sm-9">
+                  <span class="count-text">No of Emots : <span class="count">30</span>,&emsp;</span>
+                  <span class="count-text">No of Opinions : <span class="count">4</span>,&emsp;</span>
+                  <span class="count-text">No of Must Do's : <span class="count">7</span>,&emsp;</span>
+                </div>
+                <div class="col-sm-3" style="padding:0px">
+                  <a class="btn btn-primary btn-sm ">View Post...</a>
+                  <a class="btn btn-danger btn-sm ">Block...</a>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+      </li> -->
+        <!-- END timeline item -->
+
+
+
+      <!-- timeline item -->
+      <!-- <li>
+          <i class="fa fa-angle-double-right bg-blue"></i>
+  
+          <div class="timeline-item">
+            <span class="time"><i class="fa fa-clock-o"></i> 10:05 AM</span>
+            <h3 class="timeline-header">
+              <span class="blue post-type"> Job Offers </span> Post <br> 
+            </h3>
+            <div class="timeline-body">
+
+              <span class="post-title-main"><span class="red post-title"> Title :</span> Etsy doostang zoodles disqus voxy zoodles,</span> <br><br>
+
+              <span class="red post-title"> Content :</span> Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+              weebly ning heekya handango imeem plugg dopplr jibjab, movity
+              jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+              quora plaxo ideeli hulu weebly balihoo... <br> <br>
+
+              <span class="post-title-main"><span class="red post-title"> Application Details :</span> Etsy doostang zoodles disqus groupon greplin oooj 
+              voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity
+              jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+              quora plaxo ideeli hulu weebly balihoo...</span> <br><br>
+            </div>
+            <div class="timeline-footer ">
+              <div class="row">
+                <div class="col-sm-9">
+                  <span class="count-text">No of Emots : <span class="count">30</span>,&emsp;</span>
+                  <span class="count-text">No of Clarify : <span class="count">4</span>,&emsp;</span>
+                </div>
+                <div class="col-sm-3" style="padding:0px">
+                  <a class="btn btn-primary btn-sm ">View Post...</a>
+                  <a class="btn btn-danger btn-sm ">Block...</a>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+      </li> -->
+        <!-- END timeline item -->
+
+
+      <!-- timeline item -->
+      <!-- <li>
+          <i class="fa fa-angle-double-right bg-blue"></i>
+  
+          <div class="timeline-item">
+            <span class="time"><i class="fa fa-clock-o"></i> 10:05 AM</span>
+            <h3 class="timeline-header">
+              <span class="blue post-type"> Explore </span> Post in <span class="blue"> Pet Videos </span> <br> 
+            </h3>
+            <div class="timeline-body">
+  
+              <span class="post-title-main"><span class="red post-title"> Title :</span> Etsy doostang zoodles disqus voxy zoodles,</span> <br><br>
+              
+              <iframe width="100%" height="320" src="https://www.youtube.com/embed/pDiVmixW3MA"></iframe> <br>
+            </div>
+            <div class="timeline-footer ">
+              <div class="row">
+                <div class="col-sm-9">
+                  <span class="count-text">No of Emots : <span class="count">30</span>,&emsp;</span>
+                  <span class="count-text">No of Questions : <span class="count">4</span>,&emsp;</span>
+                  <span class="count-text">No of Opinions : <span class="count">7</span>,&emsp;</span>
+                </div>
+                <div class="col-sm-3" style="padding:0px">
+                  <a class="btn btn-primary btn-sm ">View Post...</a>
+                  <a class="btn btn-danger btn-sm ">Block...</a>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+      </li> -->
+        <!-- END timeline item -->
+
+
+      <!-- timeline item -->
+      <!-- <li>
+          <i class="fa fa-angle-double-right bg-blue"></i>
+  
+          <div class="timeline-item">
+            <span class="time"><i class="fa fa-clock-o"></i> 09:05 AM</span>
+            <h3 class="timeline-header">
+              <span class="blue post-type"> Explore </span> Post in <span class="blue"> Stories </span> <br> 
+            </h3>
+            <div class="timeline-body">
+  
+              <span class="post-title-main"><span class="red post-title"> Title :</span> Etsy doostang zoodles disqus voxy zoodles,</span> <br><br>
+
+              <span class="red post-title"> Content :</span> Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+              weebly ning heekya handango imeem plugg dopplr jibjab, movity
+              jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+              quora plaxo ideeli hulu weebly balihoo...
+            </div>
+            <div class="timeline-footer ">
+              <div class="row">
+                <div class="col-sm-9">
+                  <span class="count-text">No of Emots : <span class="count">30</span>,&emsp;</span>
+                  <span class="count-text">No of Questions : <span class="count">4</span>,&emsp;</span>
+                  <span class="count-text">No of Opinions : <span class="count">7</span>,&emsp;</span>
+                </div>
+                <div class="col-sm-3" style="padding:0px">
+                  <a class="btn btn-primary btn-sm ">View Post...</a>
+                  <a class="btn btn-danger btn-sm ">Block...</a>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+      </li> -->
+        <!-- END timeline item -->
+
+
+
+
+    <!-- /.timeline-label -->
+    <li>
+      <i class="fa fa-clock-o bg-gray"></i>
+    </li>
+  </ul>
+</div>
+<!-- /.tab-pane -->
+
+
+
+
+

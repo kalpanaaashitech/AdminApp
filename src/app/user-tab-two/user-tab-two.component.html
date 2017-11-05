@@ -1,0 +1,167 @@
+
+  <div class="active tab-pane" style="margin-top:20px;">
+
+      <div class="row" style="text-align:center" *ngIf="followusers?.length < '1' && Loader " >
+          <img src="../../assets/12.gif" style="height:120px; width:160px;" ><br>
+          <h4 style="color:rgba(230, 57, 5, 0.66);">Loading ...</h4>
+      </div>
+
+    
+      <style>
+        .block{
+          display: block ;
+        }
+        </style>
+        <ul class="collapsible popout" data-collapsible="accordion" *ngIf="followusers?.length >= '1' || !Loader " >
+          <li [class.active]="isFollowActive">
+             <div class="collapsible-header border_top_box" [class.active]="isFollowActive"  (click)="toggleFollow()">
+                <i class="material-icons">people</i> Followers <span class="red"><b> &emsp; ( {{followusers?.length}} ) </b></span>
+            </div>
+              <div class="collapsible-body" [class.block]="isFollowActive">
+                <div style="max-height:500px; overflow-Y:auto">
+                  <div class="row" style="margin:5px 0px;">
+                      <div class="col-sm-4" *ngFor="let followuser of followusers ;let i = index " style="height:165px;">
+                          <div class="box box-widget widget-user-2" style="box-shadow:none;" >
+                            <div class="row user-background" style="margin:0px -7px; height:150px;" [class.user-main-hover]="i == selectedRow"  (mouseout)="changeStyle(i)" (mouseover)="changeStyle(i)" (click)="UserTabOne(followuser.id)">
+                              <div class="col-sm-12 text-center">
+                                  <img *ngIf="followuser.image == ''" class="img-circle" src="http://www.inscube.com/assets/images/user.png" alt="User Avatar" style="height:75px;width:75px; margin-top:5px;">
+                                  <img *ngIf="(followuser.image | lowercase).indexOf('http') != '-1'"  [src]="followuser.image" class="img-circle" alt="User Avatar" style="height:75px;width:75px; margin-top:5px;">
+                                  <img *ngIf="followuser.image != '' && (followuser.image | lowercase).indexOf('http') == '-1'" class="img-circle" src="http://www.inscube.com/assets/profile/{{followuser.image}}" alt="User Avatar" style="height:75px;width:75px; margin-top:5px;">
+                              </div>
+                              <div class="col-sm-12 text-center">
+                                <h4 style="margin:0"> {{followuser.first_name}} {{followuser.last_name }} <small>( {{followuser.inscube_name }} )</small>,</h4>
+                                <span> {{followuser.job }} <a>@</a>{{followuser.company }} </span>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+            <li [class.active]="isFollowingActive">
+              <div class="collapsible-header" [class.active]="isFollowingActive"  (click)="toggleFollowing()">
+                <i class="material-icons">person_add</i> Following <span class="red"><b> &emsp; ( {{followingusers?.length}} ) </b></span>
+              </div>
+                <div class="collapsible-body" [class.block]="isFollowingActive">
+                  <div style="max-height:500px; overflow-Y:auto">
+                    <div class="row" style="margin:5px 0px;">
+                        <div class="col-sm-4" *ngFor="let followinguser of followingusers ;let i = index " style="height:165px;">
+                            <div class="box box-widget widget-user-2" style="box-shadow:none;" >
+                              <div class="row user-background" style="margin:0px -7px; height:150px;" [class.user-main-hover]="i == selectedRow"  (mouseout)="changeStyle(i)" (mouseover)="changeStyle(i)" (click)="UserTabOne(followinguser.id)">
+                                <div class="col-sm-12 text-center">
+                                    <img *ngIf="followinguser.image == ''" class="img-circle" src="http://www.inscube.com/assets/images/user.png" alt="User Avatar" style="height:75px;width:75px; margin-top:5px;">
+                                    <img *ngIf="(followinguser.image | lowercase).indexOf('http') != '-1'"  [src]="followinguser.image" class="img-circle" alt="User Avatar" style="height:75px;width:75px; margin-top:5px;">
+                                    <img *ngIf="followinguser.image != '' && (followinguser.image | lowercase).indexOf('http') == '-1'" class="img-circle" src="http://www.inscube.com/assets/profile/{{followinguser.image}}" alt="User Avatar" style="height:75px;width:75px; margin-top:5px;">
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                  <h4 style="margin:0"> {{followinguser.first_name}} {{followinguser.last_name }} <small>( {{followinguser.inscube_name }} )</small>,</h4>
+                                  <span> {{followinguser.job }} <a>@</a>{{followinguser.company }} </span>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                   <!-- /.post -->
+                  </div>
+                </div>
+            </li>
+            <!-- <li [class.active]="isCommunityActive">
+              <div class="collapsible-header" [class.active]="isCommunityActive" (click)="toggleCommunity()">
+                <i class="material-icons">question_answer</i> Community  <span class="red"><b> &emsp; ( 23 ) </b></span>
+              </div>
+               <div class="collapsible-body" [class.block]="isCommunityActive">
+                <div style="max-height:300px; overflow-Y:auto">
+                  <div class="row" style="margin:0px 0px;">
+                      <div class="col-sm-4">
+                          <div class="box box-widget widget-user-2">
+                            <div class="row user-background" style="margin:0px -7px;">
+                              <div class="col-sm-12 text-center">
+                                  <img class="img-circle" src="../assets/css/dist/img/user7-128x128.jpg" alt="User Avatar" style="height:80px;margin-top:5px;">
+                              </div>
+                              <div class="col-sm-12 text-center">
+                                <h4 style="margin:0"> Kalaivanan <small>( @kalai )</small>,</h4>
+                                <span>Software Engineer <a>@</a> Wibro. </span>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="box box-widget widget-user-2">
+                            <div class="row user-background" style="margin:0px -7px;">
+                                <div class="col-sm-12 text-center">
+                                    <img class="img-circle" src="../assets/css/dist/img/user8-128x128.jpg" alt="User Avatar" style="height:80px;margin-top:5px;">
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                  <h4 style="margin:0"> Kalaivanan <small>( @kalai )</small>,</h4>
+                                  <span>Software Engineer <a>@</a> Wibro. </span>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="box box-widget widget-user-2">
+                            <div class="row user-background" style="margin:0px -7px;">
+                                <div class="col-sm-12 text-center">
+                                    <img class="img-circle" src="../assets/css/dist/img/user7-128x128.jpg" alt="User Avatar" style="height:80px;margin-top:5px;">
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                  <h4 style="margin:0"> Kalaivanan <small>( @kalai )</small>,</h4>
+                                  <span>Software Engineer <a>@</a> Wibro. </span>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="box box-widget widget-user-2">
+                            <div class="row user-background" style="margin:0px -7px;">
+                              <div class="col-sm-12 text-center">
+                                  <img class="img-circle" src="../assets/css/dist/img/user7-128x128.jpg" alt="User Avatar" style="height:80px;margin-top:5px;">
+                              </div>
+                              <div class="col-sm-12 text-center">
+                                <h4 style="margin:0"> Kalaivanan <small>( @kalai )</small>,</h4>
+                                <span>Software Engineer <a>@</a> Wibro. </span>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="box box-widget widget-user-2">
+                            <div class="row user-background" style="margin:0px -7px;">
+                                <div class="col-sm-12 text-center">
+                                    <img class="img-circle" src="../assets/css/dist/img/user8-128x128.jpg" alt="User Avatar" style="height:80px;margin-top:5px;">
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                  <h4 style="margin:0"> Kalaivanan <small>( @kalai )</small>,</h4>
+                                  <span>Software Engineer <a>@</a> Wibro. </span>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="box box-widget widget-user-2">
+                            <div class="row user-background" style="margin:0px -7px;">
+                                <div class="col-sm-12 text-center">
+                                    <img class="img-circle" src="../assets/css/dist/img/user7-128x128.jpg" alt="User Avatar" style="height:80px;margin-top:5px;">
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                  <h4 style="margin:0"> Kalaivanan <small>( @kalai )</small>,</h4>
+                                  <span>Software Engineer <a>@</a> Wibro. </span>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </li> -->
+          </ul>
+
+          <go-top-button [html]="'<i class=\'fa fa-arrow-up\'></i>'" [animate]="true" [speed]="5" [acceleration]="2" [scrollDistance]="500"
+            [styles]="{ 'border-radius':'20px', 'right':'25px', 'top':'90%', 'width':'40px', 'height':'40px', 'background':'transparent', 
+            'color':'rgba(230, 57, 5, 0.66)', 'border':'2px solid', 'line-height':'30px', 'font-size':'20px' }">
+       </go-top-button>
+  
+      </div>
+      <!-- /.tab-pane -->

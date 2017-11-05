@@ -1,0 +1,91 @@
+<div class="content-wrapper" style="min-height: 1100px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1> Deleted Users </h1>
+      <ol class="breadcrumb">
+        <!-- <li class="active"> <h2 style="font-size:20px;margin:0px"> No Of Duplicate Emails ( {{ emailDuplicts?.length }} ) </h2></li> -->
+      </ol>
+    </section>
+    <section class="content user_duplicate_tabs">
+      
+      <div class="row" *ngIf = "users?.length < '1' && Loader "  style="text-align:center" >
+              <img src="../../assets/12.gif" style="height:120px; width:160px;" ><br>
+              <h4 style="color:rgba(230, 57, 5, 0.66);">Loading ...</h4>
+      </div>
+  
+      <div class="row" *ngIf = "users?.length < '1' && !Loader "  style="text-align:center" >
+        <h3 style="color:rgba(230, 57, 5, 0.66);"> Deleted Users Not Found </h3>
+      </div>
+  
+      <div class="row" *ngIf = "users?.length >= '1'" >
+        <div class="col-sm-12">
+          <div class="row" style="margin-bottom:-10px;margin-left:-5px;margin-right:-5px;">
+            <div class="col-sm-4">
+              <form>
+                <div class="form-group">
+                  <label style="font-weight:500"> Filter by Inscube Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="InscubeName" id="search" value="" name="ins_name">
+                </div>
+              </form>
+            </div>
+            <div class="col-sm-2">
+              <!-- <form>
+                <div class="form-group">
+                  <label style="font-weight:500"> Filter by Email </label>
+                  <input type="text" class="form-control" [(ngModel)]="email_filter" id="search" value="" name="email">
+                </div>
+               </form> -->
+            </div>
+            <div class="col-sm-6">
+              <h4 style=" float:right; margin-top:40px;" > No.Of Deleted Users ( {{ (users | AllUserFilter : InscubeName )?.length }})</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12" >
+            <div class="row user_view_style_1" style="margin:0px 0px;">
+                <div class="col-sm-12 uers_list" *ngFor="let user of users | AllUserFilter: InscubeName ;let i = index ">
+                    <div class="user_main user_main_not_hover" [class.user-main-hover]="i == selectedRow"  (mouseout)="changeStyle(i)" (mouseover)="changeStyle(i)">
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-sm-2" style="padding-right:0px; width:20%" >
+                                <img *ngIf="user.image == ''"  src="http://www.inscube.com/assets/images/user.png"  class="user_img">
+                                <img *ngIf="(user.image | lowercase).indexOf('http') != '-1'"  [src]="user.image"  class="user_img">
+                                <img *ngIf="user.image != '' && (user.image | lowercase).indexOf('http') == '-1'" src="http://www.inscube.com/assets/profile/{{user.image}}" class="user_img">
+                            </div>
+                            <div class="col-sm-3" style="padding-left:0px">
+                                <p> <b> Name :</b> {{ user.first_name }} {{ user.flast_name }} </p>
+                                <p> <b> Inscube Name :</b> {{ user.inscube_name }} </p>
+                                <p> <b> Date of Birth :</b> <span *ngIf="user.day != ''"> {{ user.day }}/{{ user.month }}/{{ user.year }} </span> </p>
+                                <p> <b> Gender :</b> {{ user.gender }} </p>
+                                <p> <b> Work :</b> <span *ngIf="user.job != ''"> {{ user.job }} <b> @ </b>  {{ user.company }} </span> </p>
+                                <p> <b> Address :</b> <span *ngIf="user.city_name != '' || user.state_name != '' ||  user.country_name != '' "> {{ user.city_name }}, {{ user.state_name }}, {{ user.country_name }} </span> </p>
+  
+                            </div>
+                            <div class="col-sm-2">
+                                <p> <b> No.Of Posts :</b> {{ user.posts_count }} </p>
+                                <p> <b> No.Of Answers :</b> {{ user.answers }} </p>
+                                <p> <b> No.Of Emots :</b> {{ user.emots }} </p>
+                                <p> <b> No.Of Questions :</b> {{ user.questions }} </p>
+                            </div>
+                            <div class="col-sm-2">
+                                <p> <b> No.Of Opinions :</b> {{ user.opinions }} </p>
+                                <p> <b> No.Of Try It's :</b> {{ user.try_its }} </p>
+                                <p> <b> No.Of Must Do's :</b> {{ user.must_dos }} </p>
+                            </div>
+                            <div class="col-sm-2" style="text-align:center;">
+                                <button (click)="UserTabOne(user.id)" class="btn btn-primary btn-sm"> View Profile </button>
+                                <button (click)="UnDoUser(user.id)" class="btn btn-warning btn-sm"> UnDo User </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  
+      <go-top-button [html]="'<i class=\'fa fa-arrow-up\'></i>'" [animate]="true" [speed]="5" [acceleration]="2" [scrollDistance]="500"
+        [styles]="{ 'border-radius':'20px', 'right':'25px', 'top':'90%', 'width':'40px', 'height':'40px', 'background':'transparent', 
+        'color':'rgba(230, 57, 5, 0.66)', 'border':'2px solid', 'line-height':'30px', 'font-size':'20px' }">
+   </go-top-button>
+  
+    </section>
+  </div>

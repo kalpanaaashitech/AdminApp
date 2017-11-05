@@ -1,0 +1,221 @@
+.timeline-item .timeline-header{
+    margin: 0px;
+    padding: 3px;
+    font-size: 17px;
+    border-bottom:1px solid lightgray;
+}
+.timeline-item .timeline-item-left{
+    padding-right: 0px;
+    border-right:1px solid lightgray;
+}
+.timeline-item .timeline-header .time{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    font-size: 14px;
+}
+.timeline-item .timeline-body{
+    padding: 10px;
+}
+.timeline-item .timeline-footer{
+    padding: 10px;
+    border-top: 1px solid lightgray;
+}
+
+.post-image{
+    width: 100%;
+    display: inline-block;
+}
+.post-image .image-1{
+    width: 100%;
+    height: 300px;
+    float: left;
+}
+.post-image .image-2{
+    width: 50%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-3{
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-4{
+    width: 50%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-5{
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-5:nth-child(4){
+    width: 50%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-5:nth-child(5){
+    width: 50%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-6{
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-7{
+    width: 25%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+    text-align: center;
+}
+.post-image .image-7:nth-child(5){
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-7:nth-child(6){
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-7:nth-child(7){
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+}
+.post-image .image-8{
+    width: 25%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+    text-align: center;
+}
+.post-image .image-9{
+    width: 33.3%;
+    height: 170px;
+    padding: 5px;
+    float: left;
+    text-align: center;
+}
+
+.profile_img{
+ padding: 1px; 
+ border: 1px solid lightgrey;
+}
+
+
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+    z-index: 2;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid lightgray;
+    padding: 2px 9px;
+    border-radius: 15px;
+    margin-left: 7px;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 25%;
+    margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.55) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.post_tabs{
+    border-left: 1px solid lightgray;
+}
+
+.tab_in_ul{
+    margin: 0px;
+    padding: 0px;
+}
+.tab_in_li{
+    list-style-type: none
+}
+.tab_in_ul a .tab_in_li{
+    color: #777777;
+    background-color: #f1f1f1;
+}
+.tab_in_ul a:hover .tab_in_li{
+    color: #333333;
+    background-color:  #f9f9f9;
+    cursor: pointer;
+}
+.tab_in_ques{
+    line-height: 45px;
+    margin: 0px;
+}
+.timeline_li{
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+.timeline_li>.fa{
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+    position: absolute;
+    color: #666;
+    background: #d2d6de;
+    border-radius: 50%;
+    text-align: center;
+    left: 18px;
+    top: 0;
+}
+
+.timeline_li .timeline-item{
+    border-radius: 3px;
+    margin-top: 0;
+    color: #444;
+    margin-left: 60px;
+    margin-right: 15px;
+    padding: 0;
+    position: relative;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    box-shadow: none;
+}

@@ -1,0 +1,276 @@
+<div class="content-wrapper" style="min-height: 1100px;">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1> Duplicate Users </h1>
+    <ol class="breadcrumb">
+      <!-- <li class="active"> <h2 style="font-size:20px;margin:0px"> No Of Duplicate Emails ( {{ emailDuplicts?.length }} ) </h2></li> -->
+    </ol>
+  </section>
+
+  <style>
+     .none{
+         display: none;
+     } 
+     .block{
+         display: table-row;
+     }
+</style>
+
+  <section class="content user_duplicate_tabs">
+
+        <div class="row" *ngIf = "emailDuplicts?.length < '1' && Loader "  style="text-align:center" >
+                <img src="../../assets/12.gif" style="height:120px; width:160px;" ><br>
+                <h4 style="color:rgba(230, 57, 5, 0.66);">Loading ...</h4>
+        </div>
+
+        <tabset *ngIf = "emailDuplicts?.length > '1' || !Loader ">
+            <tab>
+                <span *tabHeading>
+                    Duplicate Emails  ( {{emailDuplicts?.length}} )
+                </span>
+                <ul class="tab_in_ul">
+                    <div class="box" style="padding:20px 30px; border-top:0px;">
+                        <table class="table">
+                            <thead class="thead">
+                                <tr class="tr">
+                                    <th style="width:5%;"> S.No </th>
+                                    <th style="width:65%;"> Email </th>
+                                    <th style="width:20%;"> No.Of Duplicates </th>
+                                    <th style="width:10%;"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="emailDuplicts?.length < '1'">
+                                <tr class="tr">
+                                    <td  colspan="4"><h4 style="text-align:center"> Email Duplicate Users Not Found </h4></td>
+                                </tr>
+                            </tbody>
+                            <tbody class="tbody" *ngFor="let emailDuplict of emailDuplicts ;let j = index ">
+                                <tr *ngIf="emailDuplict.users?.length < '1'"> <h3 style="text-align:center"> Email Duplicate Users Not Found </h3></tr>
+                                <tr class="tr" *ngIf="emailDuplict.users?.length >= '1'">
+                                    <td class="td"> {{ j+1 }} </td>
+                                    <td class="td"> {{ emailDuplict.email }} </td>
+                                    <td class="td"> {{ emailDuplict.users?.length }} </td>
+                                    <td class="td" style="text-align:center;"> 
+                                        <button *ngIf = "j != EmailDuplicateUserView" (click)="EmailDupUserView(j)" class="btn btn-success btn-sm"> View Users </button>
+                                        <button *ngIf = "j == EmailDuplicateUserView" (click)="EmailDupUserView()" class="btn btn-success btn-sm"> Hide Users </button>
+                                    </td>
+                                </tr>
+                                <tr class="tr-contant none" [class.block]="j == EmailDuplicateUserView" *ngIf="emailDuplict.users?.length >= '1'">
+                                    <td colspan="4">
+                                        <div class="row" >
+                                            <div class="col-sm-12" >
+                                                <div class="row user_view_style_1" style="margin:0px 0px;">
+                                                    <div class="col-sm-12 uers_list" *ngFor="let emailDuplictUser of emailDuplict.users ;let i = index ">
+                                                        <div class="user_main user_main_not_hover" [class.user-main-hover]="i == selectedRow"  (mouseout)="changeStyle(i)" (mouseover)="changeStyle(i)">
+                                                            <div class="row" style="margin-top:10px">
+                                                                <div class="col-sm-2" style="padding-right:0px; width:20%" >
+                                                                    <img *ngIf="emailDuplictUser.image == ''"  src="http://www.inscube.com/assets/images/user.png"  class="user_img">
+                                                                    <img *ngIf="(emailDuplictUser.image | lowercase).indexOf('http') != '-1'"  [src]="emailDuplictUser.image"  class="user_img">
+                                                                    <img *ngIf="emailDuplictUser.image != '' && (emailDuplictUser.image | lowercase).indexOf('http') == '-1'" src="http://www.inscube.com/assets/profile/{{emailDuplictUser.image}}" class="user_img">
+                                                                </div>
+                                                                <div class="col-sm-3" style="padding-left:0px">
+                                                                    <p> <b> Name :</b> {{ emailDuplictUser.first_name }} {{ emailDuplictUser.flast_name }} </p>
+                                                                    <p> <b> Inscube Name :</b> {{ emailDuplictUser.inscube_name }} </p>
+                                                                    <p> <b> Date of Birth :</b> <span *ngIf="emailDuplictUser.day != ''"> {{ emailDuplictUser.day }}/{{ emailDuplictUser.month }}/{{ emailDuplictUser.year }} </span> </p>
+                                                                    <p> <b> Gender :</b> {{ emailDuplictUser.gender }} </p>
+                                                                    <p> <b> Work :</b> <span *ngIf="emailDuplictUser.job != ''"> {{ emailDuplictUser.job }} <b> @ </b>  {{ emailDuplictUser.company }} </span> </p>
+                                                                    <p> <b> Address :</b> <span *ngIf="emailDuplictUser.city_name != '' || emailDuplictUser.state_name != '' ||  emailDuplictUser.country_name != '' "> {{ emailDuplictUser.city_name }}, {{ emailDuplictUser.state_name }}, {{ emailDuplictUser.country_name }} </span> </p>
+                    
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <p> <b> No.Of Posts :</b> {{ emailDuplictUser.posts_count }} </p>
+                                                                    <p> <b> No.Of Answers :</b> {{ emailDuplictUser.answers }} </p>
+                                                                    <p> <b> No.Of Emots :</b> {{ emailDuplictUser.emots }} </p>
+                                                                    <p> <b> No.Of Questions :</b> {{ emailDuplictUser.questions }} </p>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <p> <b> No.Of Opinions :</b> {{ emailDuplictUser.opinions }} </p>
+                                                                    <p> <b> No.Of Try It's :</b> {{ emailDuplictUser.try_its }} </p>
+                                                                    <p> <b> No.Of Must Do's :</b> {{ emailDuplictUser.must_dos }} </p>
+                                                                </div>
+                                                                <div class="col-sm-2" style="text-align:center;">
+                                                                    <button (click)="UserTabOne(emailDuplictUser.id)" class="btn btn-primary btn-sm"> View Profile </button>
+                                                                    <button (click)="BlockUserEmailDuplicate(emailDuplictUser.id,emailDuplict.id,i,j)" class="btn btn-warning btn-sm"> Block User </button>
+                                                                    <button (click)="DeleteUserEmailDuplicate(emailDuplictUser.id,emailDuplict.id,i,j)"class="btn btn-danger btn-sm"> Delete User </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ul>
+            </tab>
+            <tab>
+                <span *tabHeading>
+                    Duplicate Mobile Numbers ( {{mobileDuplicts?.length}} )
+                </span>
+                <ul class="tab_in_ul">
+                    <div class="box" style="padding:20px 30px; border-top:0px;">
+                        <table class="table">
+                            <thead class="thead">
+                                <tr class="tr">
+                                    <th style="width:5%;"> S.No </th>
+                                    <th style="width:65%;"> Mobile Number </th>
+                                    <th style="width:20%;"> No.Of Duplicates </th>
+                                    <th style="width:10%;"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="mobileDuplicts?.length < '1'">
+                               <tr class="tr">
+                                 <td  colspan="4"><h4 style="text-align:center"> Mobile Duplicate Users Not Found </h4></td>
+                               </tr>
+                            </tbody>
+                            <tbody class="tbody" *ngFor="let mobileDuplict of mobileDuplicts ;let j = index ">
+                               
+                                <tr class="tr">
+                                    <td class="td"> {{ j+1 }} </td>
+                                    <td class="td"> {{ mobileDuplict.mobile }} </td>
+                                    <td class="td"> {{ mobileDuplict.count }} </td>
+                                    <td class="td"> 
+                                        <button *ngIf = "j != MobileDuplicateUserView" (click)="MobileDupUserView(j)" class="btn btn-success btn-sm"> View Users </button>
+                                        <button *ngIf = "j == MobileDuplicateUserView" (click)="MobileDupUserView()" class="btn btn-success btn-sm"> Hide Users </button>
+                                    </td>
+                                </tr>
+                                <tr class="tr-contant none" [class.block]="j == MobileDuplicateUserView">
+                                    <td colspan="4">
+                                        <div class="row" >
+                                            <div class="col-sm-12" >
+                                                <div class="row user_view_style_1" style="margin:0px 0px;">
+                                                    <div class="col-sm-12 uers_list" *ngFor="let mobileDuplicttUser of mobileDuplict.users ;let i = index ">
+                                                        <div class="user_main user_main_not_hover" [class.user-main-hover]="i == selectedRow"  (mouseout)="changeStyle(i)" (mouseover)="changeStyle(i)" (click)="UserTabOne(mobileDuplicttUser.id)">
+                                                            <div class="row" style="margin-top:10px">
+                                                                <div class="col-sm-2" style="padding-right:0px; width:20%" >
+                                                                    <img *ngIf="mobileDuplicttUser.image == ''"  src="http://www.inscube.com/assets/images/user.png"  class="user_img">
+                                                                    <img *ngIf="(mobileDuplicttUser.image | lowercase).indexOf('http') != '-1'"  [src]="mobileDuplicttUser.image"  class="user_img">
+                                                                    <img *ngIf="mobileDuplicttUser.image != '' && (mobileDuplicttUser.image | lowercase).indexOf('http') == '-1'" src="http://www.inscube.com/assets/profile/{{mobileDuplicttUser.image}}" class="user_img">
+                                                                </div>
+                                                                <div class="col-sm-3" style="padding-left:0px">
+                                                                    <p> <b> Name :</b> {{ mobileDuplicttUser.first_name }} {{ mobileDuplicttUser.flast_name }} </p>
+                                                                    <p> <b> Inscube Name :</b> {{ mobileDuplicttUser.inscube_name }} </p>
+                                                                    <p> <b> Date of Birth :</b> <span *ngIf="mobileDuplicttUser.day != ''"> {{ mobileDuplicttUser.day }}/{{ mobileDuplicttUser.month }}/{{ mobileDuplicttUser.year }} </span> </p>
+                                                                    <p> <b> Gender :</b> {{ mobileDuplicttUser.gender }} </p>
+                                                                    <p> <b> Work :</b> <span *ngIf="mobileDuplicttUser.job != ''"> {{ mobileDuplicttUser.job }} <b> @ </b>  {{ mobileDuplicttUser.company }} </span> </p>
+                                                                    <p> <b> Address :</b> <span *ngIf="mobileDuplicttUser.city_name != '' || mobileDuplicttUser.state_name != '' ||  mobileDuplicttUser.country_name != '' "> {{ mobileDuplicttUser.city_name }}, {{ mobileDuplicttUser.state_name }}, {{ mobileDuplicttUser.country_name }} </span> </p>
+                    
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <p> <b> No.Of Posts :</b> {{ mobileDuplicttUser.posts_count }} </p>
+                                                                    <p> <b> No.Of Answers :</b> {{ mobileDuplicttUser.answers }} </p>
+                                                                    <p> <b> No.Of Emots :</b> {{ mobileDuplicttUser.emots }} </p>
+                                                                    <p> <b> No.Of Questions :</b> {{ mobileDuplicttUser.questions }} </p>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <p> <b> No.Of Opinions :</b> {{ mobileDuplicttUser.opinions }} </p>
+                                                                    <p> <b> No.Of Try It's :</b> {{ mobileDuplicttUser.try_its }} </p>
+                                                                    <p> <b> No.Of Must Do's :</b> {{ mobileDuplicttUser.must_dos }} </p>
+                                                                </div>
+                                                                <div class="col-sm-2" style="text-align:center;">
+                                                                    <button (click)="UserTabOne(mobileDuplicttUser.id)" class="btn btn-primary btn-sm"> View Profile </button>
+                                                                    <button (click)="BlockUserMobileDuplicate(mobileDuplicttUser.id,mobileDuplict.id,i,j)" class="btn btn-warning btn-sm"> Block User </button>
+                                                                    <button (click)="DeleteUserMobileDuplicate(mobileDuplicttUser.id,mobileDuplict.id,i,j)"class="btn btn-danger btn-sm"> Delete User </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ul>
+            </tab>
+            <tab>
+                <span *tabHeading>
+                        Without Email Users ( {{withoutEmails?.length}} )
+                </span>
+                <ul class="tab_in_ul">
+                    <div class="box" style="padding:20px 30px; border-top:0px;">
+                        <table class="table">
+                            <thead class="thead">
+                                <tr class="tr">
+                                    <th style="width:5%;"> S.No </th>
+                                    <th style="width:35%;"> Name </th>
+                                    <th style="width:30%;"> Inscube Name </th>
+                                    <th style="width:15%;"> Gender </th>
+                                    <th style="width:15%;"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="withoutEmails?.length < '1'">
+                                    <tr class="tr">
+                                      <td  colspan="5"><h4 style="text-align:center"> Without Email Users Not Found </h4></td>
+                                    </tr>
+                            </tbody>
+                            <tbody class="tbody" *ngFor="let withoutEmail of withoutEmails ;let i = index ">
+                                <tr class="tr">
+                                    <td class="td"> {{ i+1 }} </td>
+                                    <td class="td"> {{ withoutEmail.first_name }} {{ withoutEmail.flast_name }} </td>
+                                    <td class="td"> {{ withoutEmail.inscube_name }} </td>
+                                    <td class="td"> {{ withoutEmail.gender }} </td>
+                                    <td class="td" style="text-align:center;"> 
+                                        <button *ngIf = "i != WithoutEmailUserView" (click)="WithoutEmUserView(i)" class="btn btn-success btn-sm"> More Details </button>
+                                        <button *ngIf = "i == WithoutEmailUserView" (click)="WithoutEmUserView()" class="btn btn-success btn-sm"> Less Details </button>
+                                    </td>
+                                </tr>
+                                <tr class="tr-contant none" [class.block]="i == WithoutEmailUserView">
+                                    <td colspan="5">
+                                        <div class="row" class="user_view_style_2">
+                                            <div class="col-sm-2" style="padding-right:0px; width:23%" >
+                                                <img *ngIf="withoutEmail.image == ''"  src="http://www.inscube.com/assets/images/user.png"  class="user_img">
+                                                <img *ngIf="(withoutEmail.image | lowercase).indexOf('http') != '-1'"  [src]="withoutEmail.image"  class="user_img">
+                                                <img *ngIf="withoutEmail.image != '' && (withoutEmail.image | lowercase).indexOf('http') == '-1'" src="http://www.inscube.com/assets/profile/{{withoutEmail.image}}" class="user_img">
+                                            </div>
+                                            <div class="col-sm-3" style="padding-left:0px">
+                                                <p> <b> Name :</b> {{ withoutEmail.first_name }} {{ withoutEmail.flast_name }} </p>
+                                                <p> <b> Inscube Name :</b> {{ withoutEmail.inscube_name }} </p>
+                                                <p> <b> Date of Birth :</b> <span *ngIf="withoutEmail.day != ''"> {{ withoutEmail.day }}/{{ withoutEmail.month }}/{{ withoutEmail.year }} </span> </p>
+                                                <p> <b> Gender :</b> {{ withoutEmail.gender }} </p>
+                                                <p> <b> Work :</b> <span *ngIf="withoutEmail.job != ''"> {{ withoutEmail.job }} <b> @ </b>  {{ withoutEmail.company }} </span> </p>
+                                                <p> <b> Address :</b> <span *ngIf="withoutEmail.city_name != '' || withoutEmail.state_name != '' ||  withoutEmail.country_name != '' "> {{ withoutEmail.city_name }}, {{ withoutEmail.state_name }}, {{ withoutEmail.country_name }} </span> </p>
+
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <p> <b> No.Of Posts :</b> {{ withoutEmail.posts_count }} </p>
+                                                <p> <b> No.Of Answers :</b> {{ withoutEmail.answers }} </p>
+                                                <p> <b> No.Of Emots :</b> {{ withoutEmail.emots }} </p>
+                                                <p> <b> No.Of Questions :</b> {{ withoutEmail.questions }} </p>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <p> <b> No.Of Opinions :</b> {{ withoutEmail.opinions }} </p>
+                                                <p> <b> No.Of Try It's :</b> {{ withoutEmail.try_its }} </p>
+                                                <p> <b> No.Of Must Do's :</b> {{ withoutEmail.must_dos }} </p>
+                                            </div>
+                                            <div class="col-sm-2" style="text-align:center;">
+                                                <button (click)="UserTabOne(withoutEmail.id)" class="btn btn-primary btn-sm"> View Profile </button>
+                                                <button (click)="BlockUserWithoutEmail(withoutEmail.id,i)" class="btn btn-warning btn-sm"> Block User </button>
+                                                <button (click)="DeleteUserWithoutEmail(withoutEmail.id,i)" class="btn btn-danger btn-sm"> Delete user </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ul>
+            </tab>
+        </tabset>
+
+        <go-top-button [html]="'<i class=\'fa fa-arrow-up\'></i>'" [animate]="true" [speed]="5" [acceleration]="2" [scrollDistance]="500"
+            [styles]="{ 'border-radius':'20px', 'right':'25px', 'top':'90%', 'width':'40px', 'height':'40px', 'background':'transparent', 
+            'color':'rgba(230, 57, 5, 0.66)', 'border':'2px solid', 'line-height':'30px', 'font-size':'20px' }">
+       </go-top-button>
+
+
+
+
+  </section>
+
+</div>

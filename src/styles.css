@@ -1,1 +1,197 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("assets/css/bower_components/bootstrap/dist/css/bootstrap.min.css");
+@import url("assets/css/dist/css/skins/_all-skins.min.css");
+@import url("assets/css/dist/css/AdminLTE.min.css");
+@import url("assets/css/bower_components/Ionicons/css/ionicons.min.css");
+@import url("assets/css/bower_components/font-awesome/css/font-awesome.min.css");
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+
+.blue{
+    color:#3C8DBC;
+}
+.red{
+    color:#dd4b39;
+}
+.post-type{
+    font-weight: 600;
+    font-size: 18px;
+}
+.post-title{
+    font-size: 15px;
+    font-weight: 600;
+}
+.post-title-main{
+    font-size: 15px;
+}  
+.count-text{
+    font-weight: 600;
+    font-size: 16px;
+}
+.count{
+    color: #0073B7;
+}
+.converse-main{
+    width:100%;
+    display:inline-block;
+}
+.converse-sub-2{
+    width: 49%;
+    float:left;
+    border-left: 1px solid #0073B7;
+}
+.converse-sub-3{
+    width: 33%;
+    float:left;
+    border-left: 1px solid #0073B7;
+}
+.converse-sub-4{
+    width: 24%;
+    float:left;
+    border-left: 1px solid #34A5E6;
+}
+.converse-sub-5{
+    width: 19%;
+    float:left;
+    border-left: 1px solid #34A5E6;
+}
+.converse-top-text{
+    color: #0073B7;
+    font-size: 15px;
+    margin-left: 5px;
+}
+.converse-count-text{
+    margin: 5px 0px;
+    font-size: 13px;
+    margin-left: 5px;
+}
+.converse-count{
+    color: #0073B7;
+    font-size: 13px;
+}
+
+
+.post_tabs .nav-tabs{
+  background-color: rgb(251, 251, 251);
+  width: 100%;
+  height: 45px;
+ }
+.post_tabs .nav-tabs li{
+    background-color: rgb(251, 251, 251);
+    width: 50%;
+    border: none;
+   }
+.post_tabs .nav-tabs li a{
+    border: none;
+    line-height: 25px;
+    margin: 0px;
+    color: #777777;
+    border-radius: 0px;
+    font-weight: 600;
+    border-bottom: 1px solid rgb(215, 214, 214);
+   }
+
+.post_tabs .nav-tabs li a:hover,
+.post_tabs .nav-tabs li a:focus,
+.post_tabs .nav-tabs li a:active,
+.post_tabs .nav-tabs li.active a:hover,
+.post_tabs .nav-tabs li.active a:focus,
+.post_tabs .nav-tabs li.active a:active{
+    border: none;
+    line-height: 23px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 3px solid #3C8DBC;
+    color: #3C8DBC;
+   }
+.post_tabs .nav-tabs li.active a{
+    border: none;
+    line-height: 23px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 3px solid #3C8DBC;
+    color: #3C8DBC;
+   }
+.post_tabs .nav-tabs li.active a.btn:active{
+    box-shadow: none;
+}
+.post_tabs .nav-tabs li a.btn:active{
+    box-shadow: none;
+}
+
+.post_tabs.converse .nav-tabs li{
+    width: 100%;
+}
+.post_tabs.converse_tabs_2 .nav-tabs li{
+    width: 50%;
+}
+.post_tabs.converse_tabs_3 .nav-tabs li{
+    width: 33.1%;
+}
+.post_tabs.converse_tabs_4 .nav-tabs li{
+    width: 25%;
+}
+.post_tabs.converse_tabs_5 .nav-tabs li{
+    width: 20%;
+}
+
+
+
+.user_duplicate_tabs .nav-tabs{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 45px;
+    margin-bottom: 1px;
+   }
+  .user_duplicate_tabs .nav-tabs li{
+      background-color: rgb(255, 255, 255);
+      width: 33.3%;
+      border: none;
+     }
+  .user_duplicate_tabs .nav-tabs li a{
+      border: none;
+      line-height: 25px;
+      margin: 0px;
+      color: #777777;
+      border-radius: 0px;
+      font-weight: 600;
+      border-bottom: 1px solid rgb(215, 214, 214);
+     }
+  
+  .user_duplicate_tabs .nav-tabs li a:hover,
+  .user_duplicate_tabs .nav-tabs li a:focus,
+  .user_duplicate_tabs .nav-tabs li a:active{
+    color: #3C8DBC;
+    background-color: transparent;
+  }
+  .user_duplicate_tabs .nav-tabs li.active a{
+      border: none;
+      line-height: 23px;
+      border-radius: 0px;
+      background-color: transparent;
+      border-right: 1px solid rgb(215, 214, 214);
+      border-left: 1px solid rgb(215, 214, 214);
+      border-bottom: none;
+      border-top: 3px solid #3C8DBC;
+      color: #3C8DBC;
+     }
+  .user_duplicate_tabs .nav-tabs li:first-child.active a{
+    border-left: none;
+  }
+  .user_duplicate_tabs .nav-tabs li:last-child.active a{
+    border-right: none;
+  }
+  .user_duplicate_tabs .nav-tabs li.active a.btn:active{
+      box-shadow: none;
+  }
+  .user_duplicate_tabs .nav-tabs li a.btn:active{
+      box-shadow: none;
+  }
+
+
+
+  
+.mat-dialog-container{
+    padding: 0px !important;
+}

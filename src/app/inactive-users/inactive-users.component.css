@@ -1,0 +1,67 @@
+
+.user_main{
+    background-color: rgb(255, 255, 255);
+    height: 210px;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.user_main_not_hover{
+    box-shadow: 0px 0px 2px #8A8787
+}
+.user-main-hover{
+    box-shadow: 0px 2px 25px #8A8787 !important;
+}
+.uers_list{
+    padding: 15px 7px;
+    height:225px;
+}
+.bg_inscube{
+    background-color: rgba(230, 57, 5, 0.66);
+}
+.color_inscube{
+   color: rgba(230, 57, 5, 0.66)
+}
+.inscube_name{
+    color:rgba(230, 57, 5, 0.66);
+    font-size: 13px; 
+    font-weight: 500;
+}
+.user_img{
+    height:180px;
+    width:100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.user_name{
+    margin:10px 0px 0px 0px;
+    font-size: 16px; 
+    font-weight: 600;
+}
+
+.user_email{
+    color:rgba(230, 57, 5, 0.66);
+    margin:0px 0px;
+    font-size: 15px;
+}
+.user_job{
+    margin:6px 0px;
+    font-weight: 500;
+    font-size: 15px;
+}
+.user_job span{
+    color:rgba(230, 57, 5, 0.66);
+}
+
+.user_view_style_1 .user_img{
+    height:180px;
+    width:160px;
+    margin-top: 0px;
+    margin-left: 17px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px #8A8787;
+}
+.btn{
+    width: 112px;
+    margin: 4px;
+}
